@@ -53,13 +53,13 @@ const CoinItem = ({
       {/* Adding classname through function, for example function returns classes.greenColor 
       and classname will became classes.greenColor */}
       <td className={colorDetect(priceChangeHour)}>
-        {priceChangeHour.toFixed(2)}%
+        {priceChangeHour?.toFixed(2)}%
       </td>
       <td className={colorDetect(priceChange24Hour)}>
-        {priceChange24Hour.toFixed(2)}%
+        {priceChange24Hour?.toFixed(2)}%
       </td>
       <td className={colorDetect(priceChange7Days)}>
-        {priceChange7Days.toFixed(2)}%
+        {priceChange7Days?.toFixed(2)}%
       </td>
       <td>{currencyFormatter(totalVolume, undefined, 0)}</td>
       <td>{currencyFormatter(marketCap, "en-US", 0)}</td>

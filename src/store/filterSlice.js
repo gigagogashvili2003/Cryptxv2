@@ -26,6 +26,9 @@ const filterSlice = createSlice({
     setPriceToQuery(state, action) {
       state.filterState.priceTo = action.payload;
     },
+    clearSearch(state) {
+      state.filterState.searchQuery = "";
+    },
   },
 });
 

@@ -10,11 +10,13 @@ const CoinsTable = (props) => {
     (state) => state.filters.filterState
   );
 
+  const curPage = useSelector((state) => state.commons.curPage);
+
   const { sendRequest, data: coins, status, error } = useHttp(getAllCoins);
 
   useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+    sendRequest(curPage);
+  }, [sendRequest, curPage]);
 
   if (status === "pending") {
     return <p>Loading...</p>;

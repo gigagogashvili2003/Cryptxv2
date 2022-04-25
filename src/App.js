@@ -5,6 +5,7 @@ import CoinsTable from "./components/Coins/CoinsTable";
 import CoinDetail from "./components/Coins/CoinDetail";
 import Filters from "./components/Filters/Filters";
 import GlobalData from "./components/GlobalCryptoData/GlobalData";
+import Pagination from "./components/Pagination/Pagination";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <GlobalData />
             <Filters />
             <CoinsTable />
+            <Pagination />
           </Fragment>
         }
       ></Route>

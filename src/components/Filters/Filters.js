@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../Input/Input";
 import { filterActions } from "../../store/filterSlice";
 
 import classes from "./Filters.module.css";
 
 const Filters = (props) => {
+  const { searchQuery } = useSelector((state) => state.filters.filterState);
+
   const dispatch = useDispatch();
   // Handlers wich are setting input values inside redux store
   const searchHandler = (e) => {
@@ -18,7 +20,9 @@ const Filters = (props) => {
   const priceToHandler = (e) => {
     dispatch(filterActions.setPriceToQuery(e.target.value));
   };
-  const blurHandler = (e) => {};
+  const blurHandler = (e) => {
+    dispatch(filterActions.clearSearch());
+  };
 
   const sortHandler = (e) => {
     dispatch(filterActions.setSortQuery(e.target.value));
@@ -42,6 +46,7 @@ const Filters = (props) => {
         onChange={searchHandler}
         onBlur={blurHandler}
         type="text"
+        value={searchQuery}
         placeholder="Search by Coin"
       />
       <Input
