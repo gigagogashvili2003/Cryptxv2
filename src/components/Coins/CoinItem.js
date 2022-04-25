@@ -1,7 +1,7 @@
 import classes from "./CoinItem.module.css";
 import { currencyFormatter } from "../../helpers/utils";
 import { useNavigate } from "react-router-dom";
-
+import { AiOutlineStar } from "react-icons/ai";
 const colorDetect = (price) => {
   let percantageColor;
 
@@ -37,7 +37,9 @@ const CoinItem = ({
   return (
     <tr onClick={() => navigate(`/coin/${id}`)}>
       <td>
-        <span className={classes.starIcon}>S</span>
+        <span className={classes.starIcon}>
+          <AiOutlineStar />
+        </span>
         {index}
       </td>
       <td>

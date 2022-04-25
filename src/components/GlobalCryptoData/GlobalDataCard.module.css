@@ -1,0 +1,39 @@
+.card {
+  padding: 5px;
+  background-color: #f6f6f6;
+  border-left: 6px solid rgb(117, 210, 117);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card {
+  margin: 0px 7px;
+}
+
+.grayBorder {
+  border-left: 6px solid #9bb7d4;
+}
+
+.redBorder {
+  border-left: 6px solid red;
+}
+
+.greenBorder {
+  border-left: 6px solid rgb(72, 196, 72);
+}
+
+.card .market {
+  min-width: 250px;
+  padding: 11px 10px;
+}
+
+.card .market > h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(68, 68, 68);
+  line-height: 23px;
+}
+.card .market > p {
+  font-size: 10px;
+  color: rgb(59, 59, 59);
+}
