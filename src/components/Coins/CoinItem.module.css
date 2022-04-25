@@ -1,0 +1,59 @@
+table tbody td {
+  padding: 20px 20px;
+  font-size: 16px;
+  line-height: 20px;
+  position: relative;
+  vertical-align: middle;
+}
+
+tbody tr {
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background-color: royalblue;
+  color: white;
+}
+
+tbody tr:hover .greenColor {
+  color: rgb(52, 213, 52);
+}
+tbody tr:hover .abbreviation {
+  color: white;
+}
+
+.fullName {
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+.abbreviation {
+  color: rgb(104, 104, 104);
+  font-weight: 500;
+  position: absolute;
+  right: 80px;
+}
+
+.starIcon {
+  position: absolute;
+  vertical-align: middle;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 17px;
+}
+
+.greenColor {
+  color: green;
+}
+.redColor {
+  color: red;
+}
+
+.groupContent {
+  display: flex;
+  align-items: center;
+
+  margin-right: 100px;
+}

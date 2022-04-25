@@ -1,0 +1,5 @@
+.header h1 {
+  color: var(dark-grey-color);
+  font-weight: 900;
+  padding-left: 5px;
+}

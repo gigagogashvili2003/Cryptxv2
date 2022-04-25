@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import HeaderTitle from "./components/Header/HeaderTitle";
+import CoinsTable from "./components/Coins/CoinsTable";
+import useHttp from "./hooks/useHttp";
+import { getAllCoins } from "./lib/api";
+import CoinDetail from "./components/Coins/CoinDetail";
+import Filters from "./components/Filters/Filters";
 
 function App() {
+  const { sendRequest, data: coins, status, error } = useHttp(getAllCoins);
+
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+
+  if (status === "pending") {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Something Went Wrong</p>;
+  }
+
+  if (!coins && (!coins || coins.length === 0)) {
+    return <p>No data Found!</p>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Fragment>
+            <HeaderTitle />
+            <Filters />
+            <CoinsTable coins={coins} />
+          </Fragment>
+        }
+      ></Route>
+      <Route path="/coin/:coinId" element={<CoinDetail />}></Route>
+    </Routes>
   );
 }
 
