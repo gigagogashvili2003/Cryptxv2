@@ -13,7 +13,7 @@ const httpReducer = (state, action) => {
 
   if (action.type === "SUCCESS") {
     return {
-      data: action.responseData,
+      data: action.resData,
       error: null,
       status: "completed",
     };
@@ -43,9 +43,9 @@ function useHttp(reqFunc) {
       dispatchHttp({ type: "SEND" });
       dispatch(commonActions.setGlobalLoading(true));
       try {
-        const responseData = await reqFunc(reqData);
+        const resData = await reqFunc(reqData);
 
-        dispatchHttp({ type: "SUCCESS", responseData });
+        dispatchHttp({ type: "SUCCESS", resData });
         dispatch(commonActions.setGlobalLoading(false));
       } catch (error) {
         dispatchHttp({

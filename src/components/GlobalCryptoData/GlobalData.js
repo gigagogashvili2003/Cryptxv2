@@ -8,18 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../UI/ErrorMessage";
 import { commonActions } from "../../store/commonSlice";
 import LoadingSpinner from "../UI/LoadingSpinner";
-
-const colorDetect = (price) => {
-  let percantageColor;
-
-  if (price < 0) {
-    percantageColor = classes.redColor;
-  } else {
-    percantageColor = classes.greenColor;
-  }
-
-  return percantageColor;
-};
+import { colorDetect } from "../../helpers/helpers";
 
 const GlobalData = (props) => {
   const dispatch = useDispatch();
@@ -95,6 +84,7 @@ const GlobalData = (props) => {
               0
             )}
             colorDetector={destructuredData?.marketCapPercantage}
+            percantage={destructuredData?.marketCapPercantage?.toFixed(1) + "%"}
           />
           <GlobalDataCard
             cardType="24h Trading Volume"
