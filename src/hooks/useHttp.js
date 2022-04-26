@@ -54,7 +54,7 @@ function useHttp(reqFunc) {
         });
       }
     },
-    [reqFunc]
+    [reqFunc, dispatch]
   );
 
   return {

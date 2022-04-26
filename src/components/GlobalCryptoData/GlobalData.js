@@ -7,6 +7,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../UI/ErrorMessage";
 import { commonActions } from "../../store/commonSlice";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const colorDetect = (price) => {
   let percantageColor;
@@ -64,6 +65,11 @@ const GlobalData = (props) => {
       setError(err.message);
     }
   }, [dispatch]);
+
+  if (isLoading || isGloballyLoading) {
+    return <LoadingSpinner />;
+  }
+
   if (error) {
     return <ErrorMessage errorMessage={error} />;
   }

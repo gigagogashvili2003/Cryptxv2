@@ -12,6 +12,8 @@ const CoinsTable = (props) => {
     (state) => state.filters.filterState
   );
 
+  const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
+
   const curPage = useSelector((state) => state.commons.curPage);
 
   const { sendRequest, data: coins, status, error } = useHttp(getAllCoins);
@@ -20,7 +22,7 @@ const CoinsTable = (props) => {
     sendRequest(curPage);
   }, [sendRequest, curPage]);
 
-  if (status === "pending" && !error) {
+  if ((status === "pending" || isGloballyLoading) && !error) {
     return <LoadingSpinner />;
   }
 
@@ -28,7 +30,7 @@ const CoinsTable = (props) => {
     return <ErrorMessage errorMessage={error} />;
   }
 
-  if (!coins && (!coins || coins?.length === 0)) {
+  if (status === "completed" && (!coins || coins?.length === 0)) {
     return <p>No data Found!</p>;
   }
 
@@ -77,9 +79,9 @@ const CoinsTable = (props) => {
 
   return (
     <main className={classes.mainContent}>
-      {filtering(coins).length === 0 && <p>No Coins Found!</p>}
+      {filtering(coins)?.length === 0 && <p>No Coins Found!</p>}
       <table>
-        {filtering(coins).length !== 0 && (
+        {filtering(coins)?.length !== 0 && (
           <thead>
             <tr>
               <th>#</th>

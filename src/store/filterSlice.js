@@ -18,7 +18,6 @@ const filterSlice = createSlice({
     },
     setSortQuery(state, action) {
       state.filterState.sortQuery = action.payload;
-      console.log(state.filterState.sortQuery);
     },
     setPriceFromQuery(state, action) {
       state.filterState.priceFrom = action.payload;

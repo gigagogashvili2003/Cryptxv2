@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useHttp from "../../hooks/useHttp";
 import classes from "./CoinDetail.module.css";
 import { getCoinDetail } from "../../lib/api";
@@ -11,8 +11,21 @@ import {
 import LoadingSpinner from "../UI/LoadingSpinner";
 import ErrorMessage from "../UI/ErrorMessage";
 
+const colorDetect = (price) => {
+  let percantageColor;
+
+  if (price < 0) {
+    percantageColor = classes.redColor;
+  } else {
+    percantageColor = classes.greenColor;
+  }
+
+  return percantageColor;
+};
+
 const CoinDetail = (props) => {
   const { coinId } = useParams();
+  const navigate = useNavigate();
 
   const {
     sendRequest: getCoinDetails,
@@ -84,8 +97,16 @@ const CoinDetail = (props) => {
     2
   );
 
+  const goToMainPageHandler = (e) => {
+    e.preventDefault();
+    navigate("/", { replace: true });
+  };
+
   return (
     <main className={classes.main}>
+      <button onClick={goToMainPageHandler} className={classes.backButton}>
+        &lt; Back To Main Page
+      </button>
       <div className={classes.coinContent}>
         <div className={classes.coinLeftContent}>
           <div className={classes.ranking}>
@@ -98,7 +119,9 @@ const CoinDetail = (props) => {
           </div>
           <div className={classes.price}>
             <h2>{fixedPrice}</h2>
-            <span>{loadedDetails?.priceChange24Hour?.toFixed(1)}%</span>
+            <span className={colorDetect(loadedDetails?.priceChange24Hour)}>
+              {loadedDetails?.priceChange24Hour?.toFixed(1)}%
+            </span>
           </div>
           <div className={classes.priceRange}>
             <p>{fixedLow24}</p>
@@ -249,7 +272,11 @@ const CoinDetail = (props) => {
                         2
                       )}
                     </h3>
-                    <p>
+                    <p
+                      className={colorDetect(
+                        loadedDetails?.allTimeHighChangePercantage
+                      )}
+                    >
                       {loadedDetails?.allTimeHighChangePercantage?.toFixed(1)}%
                     </p>
                   </div>
@@ -274,7 +301,11 @@ const CoinDetail = (props) => {
                         2
                       )}
                     </h3>
-                    <p>
+                    <p
+                      className={colorDetect(
+                        loadedDetails?.allTimeLowChangePercantage
+                      )}
+                    >
                       {loadedDetails?.allTimeLowChangePercantage?.toFixed(1)}%
                     </p>
                   </div>
