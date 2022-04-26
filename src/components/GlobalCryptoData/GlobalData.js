@@ -5,6 +5,7 @@ import GlobalDataCard from "./GlobalDataCard";
 import { currencyFormatter } from "../../helpers/utils";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import ErrorMessage from "../UI/ErrorMessage";
 import { commonActions } from "../../store/commonSlice";
 
 const colorDetect = (price) => {
@@ -64,7 +65,7 @@ const GlobalData = (props) => {
     }
   }, [dispatch]);
   if (error) {
-    return <p>{error}</p>;
+    return <ErrorMessage errorMessage={error} />;
   }
 
   if (!isLoading && !globalData) {

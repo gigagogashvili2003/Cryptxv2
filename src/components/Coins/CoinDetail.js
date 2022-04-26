@@ -8,6 +8,8 @@ import {
   timeFormat,
   calculateTime,
 } from "../../helpers/utils";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import ErrorMessage from "../UI/ErrorMessage";
 
 const CoinDetail = (props) => {
   const { coinId } = useParams();
@@ -23,12 +25,12 @@ const CoinDetail = (props) => {
     getCoinDetails(coinId);
   }, [getCoinDetails, coinId]);
 
-  if (status === "pending") {
-    return <p>Loading...</p>;
+  if (status === "pending" && !error) {
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <ErrorMessage errorMessage={error} />;
   }
 
   if (

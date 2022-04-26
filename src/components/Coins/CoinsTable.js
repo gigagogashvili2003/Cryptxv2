@@ -4,12 +4,13 @@ import CoinItem from "./CoinItem";
 import { useSelector } from "react-redux";
 import useHttp from "../../hooks/useHttp";
 import { getAllCoins } from "../../lib/api";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import ErrorMessage from "../UI/ErrorMessage";
 
 const CoinsTable = (props) => {
   const { searchQuery, sortQuery, priceFrom, priceTo } = useSelector(
     (state) => state.filters.filterState
   );
-  const isGlobalLoading = useSelector((state) => state.commons.globalLoading);
 
   const curPage = useSelector((state) => state.commons.curPage);
 
@@ -19,12 +20,12 @@ const CoinsTable = (props) => {
     sendRequest(curPage);
   }, [sendRequest, curPage]);
 
-  if (status === "pending") {
-    return <p>Loading...</p>;
+  if (status === "pending" && !error) {
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <ErrorMessage errorMessage={error} />;
   }
 
   if (!coins && (!coins || coins?.length === 0)) {
