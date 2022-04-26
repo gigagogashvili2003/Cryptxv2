@@ -1,6 +1,7 @@
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 import { useCallback } from "react";
-
+import { commonActions } from "../store/commonSlice";
+import { useDispatch } from "react-redux";
 const httpReducer = (state, action) => {
   if (action.type === "SEND") {
     return {
@@ -30,7 +31,8 @@ const httpReducer = (state, action) => {
 };
 
 function useHttp(reqFunc) {
-  const [httpState, dispatch] = useReducer(httpReducer, {
+  const dispatch = useDispatch();
+  const [httpState, dispatchHttp] = useReducer(httpReducer, {
     status: null,
     data: null,
     error: null,
@@ -38,13 +40,15 @@ function useHttp(reqFunc) {
 
   const sendRequest = useCallback(
     async (reqData) => {
-      dispatch({ type: "SEND" });
+      dispatchHttp({ type: "SEND" });
+      dispatch(commonActions.setGlobalLoading(true));
       try {
         const responseData = await reqFunc(reqData);
 
-        dispatch({ type: "SUCCESS", responseData });
+        dispatchHttp({ type: "SUCCESS", responseData });
+        dispatch(commonActions.setGlobalLoading(false));
       } catch (error) {
-        dispatch({
+        dispatchHttp({
           type: "ERROR",
           errorMessage: error.message || "Something went wrong!",
         });

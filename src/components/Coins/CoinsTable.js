@@ -9,6 +9,7 @@ const CoinsTable = (props) => {
   const { searchQuery, sortQuery, priceFrom, priceTo } = useSelector(
     (state) => state.filters.filterState
   );
+  const isGlobalLoading = useSelector((state) => state.commons.globalLoading);
 
   const curPage = useSelector((state) => state.commons.curPage);
 
@@ -23,7 +24,7 @@ const CoinsTable = (props) => {
   }
 
   if (error) {
-    return <p>Something Went Wrong</p>;
+    return <p>{error}</p>;
   }
 
   if (!coins && (!coins || coins?.length === 0)) {

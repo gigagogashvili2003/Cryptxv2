@@ -6,19 +6,21 @@ import CoinDetail from "./components/Coins/CoinDetail";
 import Filters from "./components/Filters/Filters";
 import GlobalData from "./components/GlobalCryptoData/GlobalData";
 import Pagination from "./components/Pagination/Pagination";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isGlobalLoading = useSelector((state) => state.commons.globalLoading);
   return (
     <Routes>
       <Route
         path="/"
         element={
           <Fragment>
-            <HeaderTitle />
+            {!isGlobalLoading && <HeaderTitle />}
             <GlobalData />
-            <Filters />
+            {!isGlobalLoading && <Filters />}
             <CoinsTable />
-            <Pagination />
+            {!isGlobalLoading && <Pagination />}
           </Fragment>
         }
       ></Route>

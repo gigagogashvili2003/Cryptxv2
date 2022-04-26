@@ -44,7 +44,7 @@ const CoinItem = ({
       </td>
       <td>
         <div className={classes.groupContent}>
-          <img style={{ width: "20px" }} alt="some img" src={imageSrc} />
+          <img style={{ width: "20px" }} alt="" src={imageSrc} />
           <span className={classes.fullName}>{coinName}</span>
           <span className={classes.abbreviation}>{shortName}</span>
         </div>
@@ -53,13 +53,13 @@ const CoinItem = ({
       {/* Adding classname through function, for example function returns classes.greenColor 
       and classname will became classes.greenColor */}
       <td className={colorDetect(priceChangeHour)}>
-        {priceChangeHour?.toFixed(2)}%
+        {priceChangeHour?.toFixed(1) || 0}%
       </td>
       <td className={colorDetect(priceChange24Hour)}>
-        {priceChange24Hour?.toFixed(2)}%
+        {priceChange24Hour?.toFixed(1) || 0}%
       </td>
       <td className={colorDetect(priceChange7Days)}>
-        {priceChange7Days?.toFixed(2)}%
+        {priceChange7Days?.toFixed(1) || 0}%
       </td>
       <td>{currencyFormatter(totalVolume, undefined, 0)}</td>
       <td>{currencyFormatter(marketCap, "en-US", 0)}</td>

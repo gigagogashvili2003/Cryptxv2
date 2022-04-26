@@ -3,7 +3,7 @@ import classes from "./GlobalDataCard.module.css";
 const GlobalDataCard = ({ cardType, value, colorDetector }) => {
   let borderClasses = "";
 
-  if (colorDetector === 1) {
+  if (colorDetector > 0) {
     borderClasses = classes.greenBorder;
   } else if (colorDetector < 0) {
     borderClasses = classes.redBorder;

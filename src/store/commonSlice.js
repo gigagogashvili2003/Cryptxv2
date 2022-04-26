@@ -4,10 +4,18 @@ const commonSlice = createSlice({
   name: "common",
   initialState: {
     curPage: 1,
+    totalPages: null,
+    globalLoading: false,
   },
   reducers: {
     setCurPage(state, action) {
-      state.curPage += action.payload;
+      state.curPage = action.payload;
+    },
+    setTotalPages(state, action) {
+      state.totalPages = parseInt(action.payload / 100, 10);
+    },
+    setGlobalLoading(state, action) {
+      state.globalLoading = action.payload;
     },
   },
 });

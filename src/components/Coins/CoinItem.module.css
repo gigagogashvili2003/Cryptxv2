@@ -1,9 +1,10 @@
 table tbody td {
   padding: 20px 20px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
   position: relative;
   vertical-align: middle;
+  text-align: center;
 }
 
 tbody tr {

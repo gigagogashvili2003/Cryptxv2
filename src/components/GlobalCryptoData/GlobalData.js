@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 
 import classes from "./GlobalData.module.css";
 import GlobalDataCard from "./GlobalDataCard";
 import { currencyFormatter } from "../../helpers/utils";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { commonActions } from "../../store/commonSlice";
 
 const colorDetect = (price) => {
   let percantageColor;
@@ -18,12 +20,15 @@ const colorDetect = (price) => {
 };
 
 const GlobalData = (props) => {
+  const dispatch = useDispatch();
   const [globalData, setGlobalData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
 
   useEffect(() => {
     const sendRequest = async () => {
+      dispatch(commonActions.setGlobalLoading(true));
       setIsLoading(true);
       axios
         .get("https://api.coingecko.com/api/v3/global")
@@ -41,8 +46,12 @@ const GlobalData = (props) => {
                 data[key].market_cap_change_percentage_24h_usd,
             });
           }
+          dispatch(
+            commonActions.setTotalPages(data?.data?.active_cryptocurrencies)
+          );
           setGlobalData(transformedData);
           setIsLoading(false);
+          dispatch(commonActions.setGlobalLoading(false));
         })
         .catch((err) => {
           setError(err.message);
@@ -53,9 +62,9 @@ const GlobalData = (props) => {
     } catch (err) {
       setError(err.message);
     }
-  }, []);
+  }, [dispatch]);
   if (error) {
-    return <p>Something Went Wrong</p>;
+    return <p>{error}</p>;
   }
 
   if (!isLoading && !globalData) {
@@ -65,25 +74,33 @@ const GlobalData = (props) => {
   const [destructuredData] = globalData;
 
   return (
-    <section className={classes.section}>
-      <GlobalDataCard
-        className={colorDetect(destructuredData?.marketCapPercantage)}
-        cardType="Market Capitalization"
-        value={currencyFormatter(destructuredData?.totalMarketCap, "en-US", 0)}
-        colorDetector={destructuredData?.marketCapPercantage}
-      />
-      <GlobalDataCard
-        cardType="24h Trading Volume"
-        value={currencyFormatter(destructuredData?.totalVolume, "en-US", 0)}
-        colorDetector={1}
-      />
-      <GlobalDataCard
-        gray
-        cardType="# Of Coins"
-        value={destructuredData?.active}
-        colorDetector={0}
-      />
-    </section>
+    <Fragment>
+      {!isGloballyLoading && (
+        <section className={classes.section}>
+          <GlobalDataCard
+            className={colorDetect(destructuredData?.marketCapPercantage)}
+            cardType="Market Capitalization"
+            value={currencyFormatter(
+              destructuredData?.totalMarketCap,
+              "en-US",
+              0
+            )}
+            colorDetector={destructuredData?.marketCapPercantage}
+          />
+          <GlobalDataCard
+            cardType="24h Trading Volume"
+            value={currencyFormatter(destructuredData?.totalVolume, "en-US", 0)}
+            colorDetector={1}
+          />
+          <GlobalDataCard
+            gray
+            cardType="# Of Coins"
+            value={destructuredData?.active}
+            colorDetector={0}
+          />
+        </section>
+      )}
+    </Fragment>
   );
 };
 
