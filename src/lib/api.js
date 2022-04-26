@@ -28,7 +28,8 @@ export const getAllCoins = async (page) => {
 
 export const getCoinDetail = async (coinId) => {
   const res = await axios.get(
-    `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
+    `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true
+    `
   );
 
   const data = res.data;
@@ -42,11 +43,9 @@ export const getCoinDetail = async (coinId) => {
     name: data.name,
     image: data.image.large,
     coingeckoRank: data.coingecko_rank,
-    coingeckoScore: data.coingecko_score,
-    communityScore: data.community_score,
+    marketCapRank: data.market_cap_rank,
     description: data.description.en,
     shortName: data.symbol,
-    hashingAlgorithm: data.hashing_algorithm,
     allTimeHigh: data.market_data.ath.usd,
     allTimeHighChangePercantage: data.market_data.ath_change_percentage.usd,
     allTimeHighDate: data.market_data.ath_date.usd,
@@ -59,7 +58,17 @@ export const getCoinDetail = async (coinId) => {
     low24: data.market_data.low_24h.usd,
     high24: data.market_data.high_24h.usd,
     totalVolume: data.market_data.total_volume.usd,
-    totalSupply: data.market_data.totalSupply,
+    totalSupply: data.market_data.total_supply,
+    maxSupply: data.market_data.max_supply,
+    priceChange24Hour: data.market_data.price_change_percentage_24h,
+    fullyValuation: data.market_data.fully_diluted_valuation.usd,
+    website: data.links.homepage[0],
+    blockchair: data.links.blockchain_site.find((link) =>
+      link.includes("blockchair")
+    ),
+    sourceCode: data.links.repos_url.github[0],
+    officialForum: data.links.official_forum_url[0],
+    hashAlgorithm: data.hashing_algorithm,
   });
 
   return transformedCoinDetails;

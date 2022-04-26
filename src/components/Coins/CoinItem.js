@@ -31,8 +31,8 @@ const CoinItem = ({
 
   const flexiblePrice =
     price < 0.001
-      ? currencyFormatter(price, "en-US", 7)
-      : currencyFormatter(price, "en-US", 2);
+      ? currencyFormatter(price, "en-US", "usd", "currency", 7)
+      : currencyFormatter(price, "en-US", "usd", "currency", 2);
 
   return (
     <tr onClick={() => navigate(`/coin/${id}`)}>
@@ -61,8 +61,8 @@ const CoinItem = ({
       <td className={colorDetect(priceChange7Days)}>
         {priceChange7Days?.toFixed(1) || 0}%
       </td>
-      <td>{currencyFormatter(totalVolume, undefined, 0)}</td>
-      <td>{currencyFormatter(marketCap, "en-US", 0)}</td>
+      <td>{currencyFormatter(totalVolume, undefined, "usd", "currency", 0)}</td>
+      <td>{currencyFormatter(marketCap, "en-US", "usd", "currency", 0)}</td>
       <td>Not Done</td>
     </tr>
   );

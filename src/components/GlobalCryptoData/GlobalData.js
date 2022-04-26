@@ -83,13 +83,21 @@ const GlobalData = (props) => {
             value={currencyFormatter(
               destructuredData?.totalMarketCap,
               "en-US",
+              "usd",
+              "currency",
               0
             )}
             colorDetector={destructuredData?.marketCapPercantage}
           />
           <GlobalDataCard
             cardType="24h Trading Volume"
-            value={currencyFormatter(destructuredData?.totalVolume, "en-US", 0)}
+            value={currencyFormatter(
+              destructuredData?.totalVolume,
+              "en-US",
+              "usd",
+              "currency",
+              0
+            )}
             colorDetector={1}
           />
           <GlobalDataCard
