@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useHttp from "../../hooks/useHttp";
 import classes from "./CoinDetail.module.css";
 import { getCoinDetail } from "../../lib/api";
@@ -10,22 +10,13 @@ import {
 } from "../../helpers/utils";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import ErrorMessage from "../UI/ErrorMessage";
-
-const colorDetect = (price) => {
-  let percantageColor;
-
-  if (price < 0) {
-    percantageColor = classes.redColor;
-  } else {
-    percantageColor = classes.greenColor;
-  }
-
-  return percantageColor;
-};
+import { colorDetect } from "../../helpers/helpers";
+import { useSelector } from "react-redux";
+import BackToHomeButton from "../Button/BackToHomeButton";
 
 const CoinDetail = (props) => {
+  const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
   const { coinId } = useParams();
-  const navigate = useNavigate();
 
   const {
     sendRequest: getCoinDetails,
@@ -38,7 +29,7 @@ const CoinDetail = (props) => {
     getCoinDetails(coinId);
   }, [getCoinDetails, coinId]);
 
-  if (status === "pending" && !error) {
+  if (isGloballyLoading && !error) {
     return <LoadingSpinner />;
   }
 
@@ -56,7 +47,6 @@ const CoinDetail = (props) => {
 
   const loadedDetails = loadedCoinDetail ? loadedCoinDetail[0] : null;
 
-  console.log(loadedDetails);
   const fixedPrice = currencyFormatter(
     loadedDetails?.price,
     "en-US",
@@ -97,16 +87,9 @@ const CoinDetail = (props) => {
     2
   );
 
-  const goToMainPageHandler = (e) => {
-    e.preventDefault();
-    navigate("/", { replace: true });
-  };
-
   return (
     <main className={classes.main}>
-      <button onClick={goToMainPageHandler} className={classes.backButton}>
-        &lt; Back To Main Page
-      </button>
+      <BackToHomeButton />
       <div className={classes.coinContent}>
         <div className={classes.coinLeftContent}>
           <div className={classes.ranking}>
@@ -211,7 +194,7 @@ const CoinDetail = (props) => {
               </li>
               <li>
                 <span>Hash Algorithm</span>
-                <p>{loadedDetails?.hashAlgorithm}</p>
+                <p>{loadedDetails?.hashAlgorithm || "Not Found"}</p>
               </li>
               <li>
                 <span>Source Code</span>

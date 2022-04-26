@@ -109,7 +109,7 @@ section {
 }
 body {
   line-height: 1;
-  padding: 25px;
+  padding: 30px;
 }
 ol,
 ul {
@@ -146,8 +146,18 @@ html {
   font-family: "Poppins", sans-serif;
 }
 
+.greenColor {
+  color: green;
+}
+.redColor {
+  color: red;
+}
+
 :root {
   --dark-grey-color: rgb(48, 48, 48);
+  --lighter-grey-color: rgb(122, 122, 122);
+  --border-grey: rgba(88, 88, 88, 0.2);
+  --pagination-border: rgba(105, 105, 105, 0.3);
 }
 
 /* Global variables */

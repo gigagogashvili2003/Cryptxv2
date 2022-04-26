@@ -66,7 +66,7 @@ const GlobalData = (props) => {
     }
   }, [dispatch]);
 
-  if (isLoading || isGloballyLoading) {
+  if (isGloballyLoading && !error) {
     return <LoadingSpinner />;
   }
 

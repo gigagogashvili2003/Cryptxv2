@@ -2,15 +2,16 @@
   position: fixed;
   bottom: 10px;
   right: 20px;
-  border: 1px solid rgba(105, 105, 105, 0.4);
+  border: 1px solid var(--pagination-border);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .pagination button {
   padding: 10px 15px;
   border: none;
   outline: none;
-  background-color: transparent;
-  border: 1px solid rgba(105, 105, 105, 0.4);
+  background-color: white;
+  border: 1px solid var(--pagination-border);
 }
 .pagination button:hover {
   background-color: #3ace5d;

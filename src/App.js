@@ -7,6 +7,7 @@ import Filters from "./components/Filters/Filters";
 import GlobalData from "./components/GlobalCryptoData/GlobalData";
 import Pagination from "./components/Pagination/Pagination";
 import { useSelector } from "react-redux";
+import NotFound from "./components/UI/NotFound";
 
 function App() {
   const isGlobalLoading = useSelector((state) => state.commons.globalLoading);
@@ -25,6 +26,7 @@ function App() {
         }
       ></Route>
       <Route path="/coin/:coinId" element={<CoinDetail />}></Route>
+      <Route path="/*" element={<NotFound />}></Route>
     </Routes>
   );
 }

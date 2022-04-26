@@ -1,0 +1,12 @@
+.backButton {
+  width: 13.5%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 15px 15px;
+  background-color: royalblue;
+  color: white;
+  margin-bottom: 40px;
+  cursor: pointer;
+}

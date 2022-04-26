@@ -22,7 +22,7 @@ const CoinsTable = (props) => {
     sendRequest(curPage);
   }, [sendRequest, curPage]);
 
-  if ((status === "pending" || isGloballyLoading) && !error) {
+  if (isGloballyLoading && !error) {
     return <LoadingSpinner />;
   }
 

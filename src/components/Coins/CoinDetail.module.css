@@ -15,9 +15,9 @@
 }
 
 .ranking {
-  background-color: #343a40;
+  background-color: var(--dark-grey-color);
   color: white;
-  padding: 4px;
+  padding: 5px;
   border-radius: 5px;
   max-width: 80px;
   width: 100%;
@@ -58,14 +58,6 @@
   font-size: 20px;
 }
 
-.greenColor {
-  color: green;
-}
-
-.redColor {
-  color: red;
-}
-
 .priceRange {
   width: 50%;
   display: flex;
@@ -104,12 +96,13 @@
 
 .marketCapLeft ul li,
 .marketCapRight ul li {
-  color: rgba(107, 114, 128, 1);
+  color: var(--lighter-grey-color);
   padding: 5px 0;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--lighter-grey-color);
 }
 
-.marketCapLeft ul li span:nth-child(2) {
+.marketCapLeft ul li span:nth-child(2),
+.marketCapRight ul li span:nth-child(2) {
   font-weight: bold;
 }
 
@@ -153,10 +146,9 @@
   font-size: 13px;
 }
 
-.infoContent ul li a:hover,
-.infoContent ul li p:hover {
-  background-color: lightskyblue;
-  color: white;
+.infoContent ul li a,
+.infoContent ul li p {
+  color: rgb(81, 113, 209);
 }
 
 /* Price Container */
@@ -193,7 +185,7 @@
   align-items: center;
 
   justify-content: space-between;
-  border-bottom: 1px solid rgba(107, 114, 128, 0.2);
+  border-bottom: 1px solid var(--lighter-grey-color);
 }
 
 .content ul li p {
@@ -222,17 +214,4 @@
 
 .allTimeDate time {
   font-size: 11px;
-}
-
-.backButton {
-  width: 13.5%;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  font-size: 16px;
-  padding: 15px 15px;
-  background-color: royalblue;
-  color: white;
-  margin-bottom: 40px;
-  cursor: pointer;
 }

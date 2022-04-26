@@ -5,10 +5,16 @@ table tbody td {
   position: relative;
   vertical-align: middle;
   text-align: center;
+  border-bottom: 1px solid var(--border-grey);
+}
+
+tbody {
+  border-collapse: separate;
 }
 
 tbody tr {
   transition: all 0.2s;
+
   cursor: pointer;
 }
 
@@ -30,7 +36,7 @@ tbody tr:hover .abbreviation {
 }
 
 .abbreviation {
-  color: rgb(104, 104, 104);
+  color: var(--lighter-grey-color);
   font-weight: 500;
   position: absolute;
   right: 0px;
@@ -43,13 +49,6 @@ tbody tr:hover .abbreviation {
   top: 50%;
   transform: translateY(-50%);
   font-size: 17px;
-}
-
-.greenColor {
-  color: green;
-}
-.redColor {
-  color: red;
 }
 
 .groupContent {

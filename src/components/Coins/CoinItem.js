@@ -2,18 +2,7 @@ import classes from "./CoinItem.module.css";
 import { currencyFormatter } from "../../helpers/utils";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineStar } from "react-icons/ai";
-const colorDetect = (price) => {
-  let percantageColor;
-
-  if (price < 0) {
-    percantageColor = classes.redColor;
-  } else {
-    percantageColor = classes.greenColor;
-  }
-
-  return percantageColor;
-};
-
+import { colorDetect } from "../../helpers/helpers";
 const CoinItem = ({
   index,
   coinName,
