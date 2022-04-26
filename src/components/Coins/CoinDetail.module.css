@@ -215,6 +215,45 @@
   font-size: 11px;
 }
 
+.priceChangeList {
+  border-bottom: 1px solid var(--lighter-grey-color);
+  border-top: 1px solid var(--lighter-grey-color);
+
+  padding: 20px 0;
+
+  width: 100%;
+}
+.priceChangeList ul {
+  display: flex;
+
+  justify-content: space-between;
+}
+.priceChangeList ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.priceChangeList ul li p,
+.priceChangeList ul li span {
+  line-height: 20px;
+}
+
+.priceChange {
+  margin-top: 50px;
+}
+
+.priceChange h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.description {
+  margin-top: 50px;
+}
+
 /* Responsive */
 
 @media (max-width: 1000px) {

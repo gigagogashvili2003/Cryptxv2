@@ -93,6 +93,17 @@ const CoinDetail = (props) => {
     2
   );
 
+  const priceChange24Hour = (price) => {
+    return <span className={colorDetect(price)}>{price?.toFixed(1)}%</span>;
+  };
+  const priceChange24HourCurrency = (price) => {
+    return (
+      <span className={colorDetect(price)}>
+        {currencyFormatter(price, "en-US", "usd", "currency")}
+      </span>
+    );
+  };
+
   return (
     <main className={classes.main}>
       <div>
@@ -110,19 +121,10 @@ const CoinDetail = (props) => {
           </div>
           <div className={classes.price}>
             <h2>{fixedPrice}</h2>
-            <span className={colorDetect(loadedDetails?.priceChange24Hour)}>
-              {loadedDetails?.priceChange24Hour?.toFixed(1)}%
-            </span>
-            <span
-              className={colorDetect(loadedDetails?.priceChange24HourCurrency)}
-            >
-              {currencyFormatter(
-                loadedDetails?.priceChange24HourCurrency,
-                "en-US",
-                "usd",
-                "currency"
-              )}
-            </span>
+            {priceChange24Hour(loadedDetails?.priceChange24Hour)}
+            {priceChange24HourCurrency(
+              loadedDetails?.priceChange24HourCurrency
+            )}
           </div>
           <div className={classes.priceRange}>
             <p>{fixedLow24}</p>
@@ -220,6 +222,62 @@ const CoinDetail = (props) => {
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+      <div className={classes.priceChange}>
+        <h2>Price Change</h2>
+        <div className={classes.priceChangeList}>
+          <ul>
+            <li>
+              <p>24h</p>
+              {priceChange24Hour(loadedDetails?.priceChange24Hour)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange24HourCurrency
+              )}
+            </li>
+            <li>
+              <p>7d</p>
+              {priceChange24Hour(loadedDetails?.priceChange7Days)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange7DaysCurrency
+              )}
+            </li>
+            <li>
+              <p>14d</p>
+              {priceChange24Hour(loadedDetails?.priceChange14Days)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange14DaysCurrency
+              )}
+            </li>
+            <li>
+              <p>30d</p>
+              {priceChange24Hour(loadedDetails?.priceChange30Days)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange30DaysCurrency
+              )}
+            </li>
+            <li>
+              <p>60d</p>
+              {priceChange24Hour(loadedDetails?.priceChange60Days)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange60DaysCurrency
+              )}
+            </li>
+            <li>
+              <p>200d</p>
+              {priceChange24Hour(loadedDetails?.priceChange200Days)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange200DaysCurrency
+              )}
+            </li>
+            <li>
+              <p>1y</p>
+              {priceChange24Hour(loadedDetails?.priceChange1Year)}
+              {priceChange24HourCurrency(
+                loadedDetails?.priceChange1YearCurrency
+              )}
+            </li>
+          </ul>
         </div>
       </div>
       <div className={classes.coinPrice}>

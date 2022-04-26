@@ -69,6 +69,24 @@ export const getCoinDetail = async (coinId) => {
     sourceCode: data.links.repos_url.github[0],
     officialForum: data.links.official_forum_url[0],
     hashAlgorithm: data.hashing_algorithm,
+    priceChange7Days: data.market_data.price_change_percentage_7d,
+    priceChange7DaysCurrency:
+      data.market_data.price_change_percentage_7d_in_currency.usd,
+    priceChange14Days: data.market_data.price_change_percentage_14d,
+    priceChange14DaysCurrency:
+      data.market_data.price_change_percentage_14d_in_currency.usd,
+    priceChange30Days: data.market_data.price_change_percentage_30d,
+    priceChange30DaysCurrency:
+      data.market_data.price_change_percentage_30d_in_currency.usd,
+    priceChange60Days: data.market_data.price_change_percentage_60d,
+    priceChange60DaysCurrency:
+      data.market_data.price_change_percentage_60d_in_currency.usd,
+    priceChange200Days: data.market_data.price_change_percentage_200d,
+    priceChange200DaysCurrency:
+      data.market_data.price_change_percentage_200d_in_currency.usd,
+    priceChange1Year: data.market_data.price_change_percentage_1y,
+    priceChange1YearCurrency:
+      data.market_data.price_change_percentage_1y_in_currency.usd,
   });
 
   return transformedCoinDetails;
