@@ -1,18 +1,24 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useHttp from "../../hooks/useHttp";
+import { useSelector } from "react-redux";
 import classes from "./CoinDetail.module.css";
+
+// Api Functions
+import useHttp from "../../hooks/useHttp";
 import { getCoinDetail } from "../../lib/api";
+
+// Helper Functions
+import { colorDetect } from "../../helpers/helpers";
 import {
   currencyFormatter,
   timeFormat,
   calculateTime,
 } from "../../helpers/utils";
-import LoadingSpinner from "../UI/LoadingSpinner";
-import ErrorMessage from "../UI/ErrorMessage";
-import { colorDetect } from "../../helpers/helpers";
-import { useSelector } from "react-redux";
+
+// Component imports
 import BackToHomeButton from "../Button/BackToHomeButton";
+import ErrorMessage from "../UI/ErrorMessage";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const CoinDetail = (props) => {
   const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
@@ -89,7 +95,9 @@ const CoinDetail = (props) => {
 
   return (
     <main className={classes.main}>
-      <BackToHomeButton />
+      <div>
+        <BackToHomeButton />
+      </div>
       <div className={classes.coinContent}>
         <div className={classes.coinLeftContent}>
           <div className={classes.ranking}>
@@ -104,6 +112,16 @@ const CoinDetail = (props) => {
             <h2>{fixedPrice}</h2>
             <span className={colorDetect(loadedDetails?.priceChange24Hour)}>
               {loadedDetails?.priceChange24Hour?.toFixed(1)}%
+            </span>
+            <span
+              className={colorDetect(loadedDetails?.priceChange24HourCurrency)}
+            >
+              {currencyFormatter(
+                loadedDetails?.priceChange24HourCurrency,
+                "en-US",
+                "usd",
+                "currency"
+              )}
             </span>
           </div>
           <div className={classes.priceRange}>

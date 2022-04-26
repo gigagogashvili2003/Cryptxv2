@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import Input from "../Input/Input";
 import { filterActions } from "../../store/filterSlice";
-
 import classes from "./Filters.module.css";
+
+// Component import
+import Input from "../Input/Input";
 
 const Filters = (props) => {
   const { searchQuery } = useSelector((state) => state.filters.filterState);

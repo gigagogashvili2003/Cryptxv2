@@ -1,8 +1,13 @@
-import classes from "./CoinItem.module.css";
-import { currencyFormatter } from "../../helpers/utils";
 import { useNavigate } from "react-router-dom";
+import classes from "./CoinItem.module.css";
+
+// Icon
 import { AiOutlineStar } from "react-icons/ai";
+
+// Helper function imports
+import { currencyFormatter } from "../../helpers/utils";
 import { colorDetect } from "../../helpers/helpers";
+
 const CoinItem = ({
   index,
   coinName,
@@ -52,7 +57,6 @@ const CoinItem = ({
       </td>
       <td>{currencyFormatter(totalVolume, undefined, "usd", "currency", 0)}</td>
       <td>{currencyFormatter(marketCap, "en-US", "usd", "currency", 0)}</td>
-      <td>Not Done</td>
     </tr>
   );
 };

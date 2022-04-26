@@ -1,14 +1,18 @@
+import axios from "axios";
 import { useEffect, useState, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { commonActions } from "../../store/commonSlice";
 
 import classes from "./GlobalData.module.css";
-import GlobalDataCard from "./GlobalDataCard";
-import { currencyFormatter } from "../../helpers/utils";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import ErrorMessage from "../UI/ErrorMessage";
-import { commonActions } from "../../store/commonSlice";
-import LoadingSpinner from "../UI/LoadingSpinner";
+
+// Helper funs
 import { colorDetect } from "../../helpers/helpers";
+import { currencyFormatter } from "../../helpers/utils";
+
+// Component imports
+import GlobalDataCard from "./GlobalDataCard";
+import LoadingSpinner from "../UI/LoadingSpinner";
+import ErrorMessage from "../UI/ErrorMessage";
 
 const GlobalData = (props) => {
   const dispatch = useDispatch();

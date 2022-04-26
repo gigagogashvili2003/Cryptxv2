@@ -1,11 +1,15 @@
 import { useEffect } from "react";
-import classes from "./CoinsTable.module.css";
-import CoinItem from "./CoinItem";
 import { useSelector } from "react-redux";
+import classes from "./CoinsTable.module.css";
+
+// Api Funcs
 import useHttp from "../../hooks/useHttp";
 import { getAllCoins } from "../../lib/api";
-import LoadingSpinner from "../UI/LoadingSpinner";
+
+// Component Imports
+import CoinItem from "./CoinItem";
 import ErrorMessage from "../UI/ErrorMessage";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const CoinsTable = (props) => {
   const { searchQuery, sortQuery, priceFrom, priceTo } = useSelector(
@@ -92,7 +96,6 @@ const CoinsTable = (props) => {
               <th>7d</th>
               <th>24h Volume</th>
               <th>Mkt Cap</th>
-              <th>Last 7 Days</th>
             </tr>
           </thead>
         )}

@@ -17,7 +17,6 @@ export const currencyFormatter = (
 
 export const timeFormat = (time) => {
   const date = new Date(time);
-  console.log(date);
 
   return date.toLocaleDateString("en-US", {
     year: "numeric",

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import classes from "./Pagination.module.css";
 import { commonActions } from "../../store/commonSlice";
+import classes from "./Pagination.module.css";
 
 // Pagination Components
 const Pagination = (props) => {

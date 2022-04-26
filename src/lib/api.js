@@ -1,7 +1,7 @@
 import axios from "axios";
 export const getAllCoins = async (page) => {
   const res = await axios(
-    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${page}&sparkline=false&price_change_percentage=1h%2C7d`
+    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${page}&sparkline=true&price_change_percentage=1h%2C7d`
   );
 
   const data = res.data;
@@ -28,13 +28,11 @@ export const getAllCoins = async (page) => {
 
 export const getCoinDetail = async (coinId) => {
   const res = await axios.get(
-    `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true
+    `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=true&sparkline=false
     `
   );
 
   const data = res.data;
-
-  console.log(data);
 
   const transformedCoinDetails = [];
 
@@ -61,6 +59,8 @@ export const getCoinDetail = async (coinId) => {
     totalSupply: data.market_data.total_supply,
     maxSupply: data.market_data.max_supply,
     priceChange24Hour: data.market_data.price_change_percentage_24h,
+    priceChange24HourCurrency:
+      data.market_data.price_change_24h_in_currency.usd,
     fullyValuation: data.market_data.fully_diluted_valuation.usd,
     website: data.links.homepage[0],
     blockchair: data.links.blockchain_site.find((link) =>
