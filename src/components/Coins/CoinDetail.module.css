@@ -297,4 +297,47 @@ i {
   .main {
     padding: 0px;
   }
+  .price h2 {
+    font-size: 23px;
+  }
+  .price span {
+    font-size: 17px;
+  }
+
+  .coinHeaderContent h2 {
+    font-size: 18px;
+  }
+  .marketCap {
+    font-size: 11px;
+  }
+  .priceRange {
+    font-size: 13px;
+  }
+
+  .infoContent ul li a,
+  .infoContent ul li span {
+    font-size: 11px;
+  }
+  .priceChange h2 {
+    font-size: 18px;
+  }
+  .priceChange ul li span,
+  .priceChange ul li p {
+    font-size: 11px;
+  }
+  .titles h2 {
+    font-size: 20px;
+  }
+  .titles p {
+    font-size: 11px;
+  }
+  .content ul li p,
+  .content ul li span {
+    font-size: 11px;
+  }
+
+  .allTimePrice p,
+  .allTimePrice h3 {
+    font-size: 11px;
+  }
 }

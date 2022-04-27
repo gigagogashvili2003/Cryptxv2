@@ -86,7 +86,6 @@ const CoinsTable = (props) => {
       }
     });
   };
-
   return (
     <main className={classes.mainContent}>
       {/* if didnot found any filtered coin it will return no coins found */}
@@ -106,7 +105,6 @@ const CoinsTable = (props) => {
             </tr>
           </thead>
         )}
-
         <tbody>
           {/* First of all filtering data and then mapping all of them */}
           {sorting(filtering(coins))?.map((coin, i) => (
