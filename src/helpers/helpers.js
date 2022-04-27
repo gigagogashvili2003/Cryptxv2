@@ -1,3 +1,4 @@
+// Reusable Functon wich detects if color would be green or red
 export const colorDetect = (price) => {
   let percantageColor;
 

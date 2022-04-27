@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { useCallback } from "react";
 import { commonActions } from "../store/commonSlice";
 import { useDispatch } from "react-redux";
+
 const httpReducer = (state, action) => {
   if (action.type === "SEND") {
     return {
@@ -29,6 +30,8 @@ const httpReducer = (state, action) => {
 
   return state;
 };
+
+// Very reusable usehttp hook
 
 function useHttp(reqFunc) {
   const dispatch = useDispatch();

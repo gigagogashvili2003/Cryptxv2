@@ -1,5 +1,6 @@
 import classes from "./ErrorMessage.module.css";
 
+// Reusable errormessage Component
 const ErrorMessage = ({ errorMessage }) => {
   return (
     <div className={classes.error}>

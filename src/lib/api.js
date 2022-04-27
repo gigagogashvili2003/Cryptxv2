@@ -1,4 +1,7 @@
 import axios from "axios";
+
+// All the actual api request functions
+
 export const getAllCoins = async (page) => {
   const res = await axios(
     `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${page}&sparkline=true&price_change_percentage=1h%2C7d`

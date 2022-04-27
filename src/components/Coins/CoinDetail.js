@@ -22,8 +22,11 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 
 const CoinDetail = (props) => {
   const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
+
+  // Getting coinId from url with useParams
   const { coinId } = useParams();
 
+  // Getting all the data what i need from usehttp
   const {
     sendRequest: getCoinDetails,
     data: loadedCoinDetail,
@@ -31,10 +34,12 @@ const CoinDetail = (props) => {
     error,
   } = useHttp(getCoinDetail);
 
+  // Sending request
   useEffect(() => {
     getCoinDetails(coinId);
   }, [getCoinDetails, coinId]);
 
+  // Checking States
   if (isGloballyLoading && !error) {
     return <LoadingSpinner />;
   }
@@ -53,6 +58,7 @@ const CoinDetail = (props) => {
 
   const loadedDetails = loadedCoinDetail ? loadedCoinDetail[0] : null;
 
+  // Reusable variables
   const fixedPrice = currencyFormatter(
     loadedDetails?.price,
     "en-US",
@@ -93,6 +99,7 @@ const CoinDetail = (props) => {
     2
   );
 
+  // Reusable functions
   const priceChange24Hour = (price) => {
     return <span className={colorDetect(price)}>{price?.toFixed(1)}%</span>;
   };

@@ -23,6 +23,8 @@ const CoinItem = ({
 }) => {
   const navigate = useNavigate();
 
+  // Reusable variable
+
   const flexiblePrice =
     price < 0.001
       ? currencyFormatter(price, "en-US", "usd", "currency", 7)

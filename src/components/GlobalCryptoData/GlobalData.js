@@ -21,6 +21,7 @@ const GlobalData = (props) => {
   const [error, setError] = useState(null);
   const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
 
+  // Sending Request to get global data
   useEffect(() => {
     const sendRequest = async () => {
       dispatch(commonActions.setGlobalLoading(true));
@@ -59,6 +60,8 @@ const GlobalData = (props) => {
     }
   }, [dispatch]);
 
+  // Checking states
+
   if (isGloballyLoading && !error) {
     return <LoadingSpinner />;
   }
@@ -71,6 +74,7 @@ const GlobalData = (props) => {
     return <p>No Data Found!</p>;
   }
 
+  // Destructuring data
   const [destructuredData] = globalData;
 
   return (

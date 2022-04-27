@@ -22,10 +22,12 @@ const CoinsTable = (props) => {
 
   const { sendRequest, data: coins, status, error } = useHttp(getAllCoins);
 
+  // Sending Request
   useEffect(() => {
     sendRequest(curPage);
   }, [sendRequest, curPage]);
 
+  // Checking states
   if (isGloballyLoading && !error) {
     return <LoadingSpinner />;
   }
@@ -38,6 +40,7 @@ const CoinsTable = (props) => {
     return <p>No data Found!</p>;
   }
 
+  // Sorting Logic
   const sorting = (data) => {
     return data?.sort((a, b) => {
       if (sortQuery === "Asc") {
@@ -50,6 +53,8 @@ const CoinsTable = (props) => {
     });
   };
 
+  // Reusable function wich detects if coinName or shortName includes searchQuery
+
   const queryIsValid = (item) => {
     return (
       item.coinName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -57,6 +62,7 @@ const CoinsTable = (props) => {
     );
   };
 
+  // Filtering function
   const filtering = (data) => {
     // Search And Filter Logic
     return data?.filter((item) => {
@@ -83,6 +89,7 @@ const CoinsTable = (props) => {
 
   return (
     <main className={classes.mainContent}>
+      {/* if didnot found any filtered coin it will return no coins found */}
       {filtering(coins)?.length === 0 && <p>No Coins Found!</p>}
       <table>
         {filtering(coins)?.length !== 0 && (

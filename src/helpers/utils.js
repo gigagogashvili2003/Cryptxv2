@@ -15,6 +15,8 @@ export const currencyFormatter = (
   return formatCurrency.format(number);
 };
 
+// Formatting time function
+
 export const timeFormat = (time) => {
   const date = new Date(time);
 
@@ -25,6 +27,7 @@ export const timeFormat = (time) => {
   });
 };
 
+// Calculating time from before to now
 export const calculateTime = (time) => {
   const currentDate = new Date();
   const date = new Date(time);
