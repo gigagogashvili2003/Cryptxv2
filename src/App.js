@@ -11,7 +11,7 @@ import NotFound from "./components/UI/NotFound";
 
 function App() {
   const isGlobalLoading = useSelector((state) => state.commons.globalLoading);
-
+  console.log("hekl");
   return (
     <Routes>
       <Route
