@@ -1,43 +1,34 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import classes from "./CoinsTable.module.css";
-
-// Api Funcs
-import useHttp from "../../hooks/useHttp";
-import { getAllCoins } from "../../lib/api";
 
 // Component Imports
 import CoinItem from "./CoinItem";
 import ErrorMessage from "../UI/ErrorMessage";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
-const CoinsTable = (props) => {
+const CoinsTable = ({ coinsState }) => {
+  // Provided data throught props
+  const { coins, isLoading, error } = coinsState;
+
   const { searchQuery, sortQuery, priceFrom, priceTo } = useSelector(
     (state) => state.filters.filterState
   );
 
-  const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
-
-  const curPage = useSelector((state) => state.commons.curPage);
-
-  const { sendRequest, data: coins, status, error } = useHttp(getAllCoins);
-
-  useEffect(() => {
-    sendRequest(curPage);
-  }, [sendRequest, curPage]);
-
-  if (isGloballyLoading && !error) {
-    return <LoadingSpinner />;
-  }
+  // Checking States
 
   if (error) {
     return <ErrorMessage errorMessage={error} />;
   }
 
-  if (status === "completed" && (!coins || coins?.length === 0)) {
-    return <p>No data Found!</p>;
+  if (isLoading) {
+    return <LoadingSpinner />;
   }
 
+  if (!isLoading && (!coins || coins?.length === 0)) {
+    return <p>No Coins Found!</p>;
+  }
+
+  // Sorting Logic
   const sorting = (data) => {
     return data?.sort((a, b) => {
       if (sortQuery === "Asc") {
@@ -50,6 +41,7 @@ const CoinsTable = (props) => {
     });
   };
 
+  // Checking if coinName or shortName includes searchQuery
   const queryIsValid = (item) => {
     return (
       item.coinName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -57,6 +49,7 @@ const CoinsTable = (props) => {
     );
   };
 
+  // Filtering Logic
   const filtering = (data) => {
     // Search And Filter Logic
     return data?.filter((item) => {
@@ -83,8 +76,11 @@ const CoinsTable = (props) => {
 
   return (
     <main className={classes.mainContent}>
+      {/* For example if user typed some text and program didnot find suitable data it will dispolay
+      No Coins Found! */}
       {filtering(coins)?.length === 0 && <p>No Coins Found!</p>}
       <table>
+        {/* If havenot coins we didn't need thead anymore */}
         {filtering(coins)?.length !== 0 && (
           <thead>
             <tr>

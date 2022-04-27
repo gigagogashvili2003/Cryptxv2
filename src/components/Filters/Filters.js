@@ -6,6 +6,7 @@ import classes from "./Filters.module.css";
 import Input from "../Input/Input";
 
 const Filters = (props) => {
+  // getting search query from redux store
   const { searchQuery } = useSelector((state) => state.filters.filterState);
 
   const dispatch = useDispatch();

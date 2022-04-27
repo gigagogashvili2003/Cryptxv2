@@ -23,12 +23,15 @@ const CoinItem = ({
 }) => {
   const navigate = useNavigate();
 
+  // For Example if price is 0.0001 it will display as $0.0001000
+  // For Exampel if price is 1 it will display as $1.00
   const flexiblePrice =
     price < 0.001
       ? currencyFormatter(price, "en-US", "usd", "currency", 7)
       : currencyFormatter(price, "en-US", "usd", "currency", 2);
 
   return (
+    // Navigating to suitable coin route
     <tr onClick={() => navigate(`/coin/${id}`)}>
       <td>
         <span className={classes.starIcon}>
@@ -44,8 +47,8 @@ const CoinItem = ({
         </div>
       </td>
       <td>{flexiblePrice}</td>
-      {/* Adding classname through function, for example function returns classes.greenColor 
-      and classname will became classes.greenColor */}
+      {/* Adding classname through function, for example if function returns greenColor, then 
+      classname will became greenColor, i've created global classes as greenColor and redColor */}
       <td className={colorDetect(priceChangeHour)}>
         {priceChangeHour?.toFixed(1) || 0}%
       </td>

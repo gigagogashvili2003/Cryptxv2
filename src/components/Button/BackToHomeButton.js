@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./BackToHomeButton.module.css";
 
+// Reusable backtohomebutton component wich navigates to /
 const BackToHomeButton = (props) => {
   const navigate = useNavigate();
   const goToMainPageHandler = () => {

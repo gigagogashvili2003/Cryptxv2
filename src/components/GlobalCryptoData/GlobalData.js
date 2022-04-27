@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState, Fragment } from "react";
+import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { commonActions } from "../../store/commonSlice";
 
@@ -14,52 +14,16 @@ import GlobalDataCard from "./GlobalDataCard";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import ErrorMessage from "../UI/ErrorMessage";
 
-const GlobalData = (props) => {
-  const dispatch = useDispatch();
-  const [globalData, setGlobalData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const isGloballyLoading = useSelector((state) => state.commons.globalLoading);
+const GlobalData = ({ globalState }) => {
+  // Getting data throught props
+  const { globalData, isLoading, error } = globalState;
 
-  useEffect(() => {
-    const sendRequest = async () => {
-      dispatch(commonActions.setGlobalLoading(true));
-      setIsLoading(true);
-      axios
-        .get("https://api.coingecko.com/api/v3/global")
-        .then((res) => {
-          const data = res.data;
+  // destructured data
+  const [destructuredData] = globalData;
 
-          const transformedData = [];
+  // Checking states
 
-          for (const key in data) {
-            transformedData.push({
-              active: data[key].active_cryptocurrencies,
-              totalMarketCap: data[key].total_market_cap.usd,
-              totalVolume: data[key].total_volume.usd,
-              marketCapPercantage:
-                data[key].market_cap_change_percentage_24h_usd,
-            });
-          }
-          dispatch(
-            commonActions.setTotalPages(data?.data?.active_cryptocurrencies)
-          );
-          setGlobalData(transformedData);
-          setIsLoading(false);
-          dispatch(commonActions.setGlobalLoading(false));
-        })
-        .catch((err) => {
-          setError(err.message);
-        });
-    };
-    try {
-      sendRequest();
-    } catch (err) {
-      setError(err.message);
-    }
-  }, [dispatch]);
-
-  if (isGloballyLoading && !error) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -67,15 +31,13 @@ const GlobalData = (props) => {
     return <ErrorMessage errorMessage={error} />;
   }
 
-  if (!isLoading && !globalData) {
+  if (!isLoading && (!globalData || globalData?.length === 0)) {
     return <p>No Data Found!</p>;
   }
 
-  const [destructuredData] = globalData;
-
   return (
     <Fragment>
-      {!isGloballyLoading && (
+      {
         <section className={classes.section}>
           <GlobalDataCard
             className={colorDetect(destructuredData?.marketCapPercantage)}
@@ -108,7 +70,7 @@ const GlobalData = (props) => {
             colorDetector={0}
           />
         </section>
-      )}
+      }
     </Fragment>
   );
 };

@@ -5,7 +5,6 @@ const commonSlice = createSlice({
   initialState: {
     curPage: 1,
     totalPages: null,
-    globalLoading: false,
   },
   reducers: {
     setCurPage(state, action) {
@@ -13,9 +12,6 @@ const commonSlice = createSlice({
     },
     setTotalPages(state, action) {
       state.totalPages = parseInt(action.payload / 100, 10);
-    },
-    setGlobalLoading(state, action) {
-      state.globalLoading = action.payload;
     },
   },
 });

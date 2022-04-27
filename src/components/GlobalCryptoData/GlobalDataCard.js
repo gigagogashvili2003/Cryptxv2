@@ -1,8 +1,11 @@
 import classes from "./GlobalDataCard.module.css";
 import { colorDetect } from "../../helpers/helpers";
 
+// Reusable card
 const GlobalDataCard = ({ cardType, value, colorDetector, percantage }) => {
   let borderClasses = "";
+
+  // Detecting border color logic
 
   if (colorDetector > 0) {
     borderClasses = classes.greenBorder;
