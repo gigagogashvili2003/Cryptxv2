@@ -73,13 +73,11 @@
   line-height: 30px;
 }
 
-.marketCapLeft,
-.marketCapRight {
-  width: 49%;
+.marketCapLeft {
+  width: 100%;
 }
 
-.marketCapLeft ul,
-.marketCapRight ul {
+.marketCapLeft ul {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -87,21 +85,19 @@
 }
 
 .marketCapLeft ul li,
-.marketCapRight ul li {
+i {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
 
-.marketCapLeft ul li,
-.marketCapRight ul li {
+.marketCapLeft ul li {
   color: var(--lighter-grey-color);
   padding: 5px 0;
   border-bottom: 1px solid var(--lighter-grey-color);
 }
 
-.marketCapLeft ul li span:nth-child(2),
-.marketCapRight ul li span:nth-child(2) {
+.marketCapLeft ul li span:nth-child(2) {
   font-weight: bold;
 }
 
@@ -277,8 +273,7 @@
     margin: 10px 0px 0px 0px;
     flex-direction: column;
   }
-  .marketCapLeft,
-  .marketCapRight {
+  .marketCapLeft {
     width: 100%;
   }
   .priceRange {

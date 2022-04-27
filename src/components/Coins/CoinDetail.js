@@ -144,7 +144,7 @@ const CoinDetail = (props) => {
                   <span>Fully Diluted Valuation</span>{" "}
                   <span>
                     {currencyFormatter(
-                      loadedDetails?.fullyValuation,
+                      loadedDetails?.fullyValuation || 0,
                       "en-US",
                       "usd",
                       "currency",
@@ -152,10 +152,6 @@ const CoinDetail = (props) => {
                     )}
                   </span>
                 </li>
-              </ul>
-            </div>
-            <div className={classes.marketCapRight}>
-              <ul>
                 <li>
                   <span>Circulating Supply</span>{" "}
                   <span>
@@ -193,6 +189,9 @@ const CoinDetail = (props) => {
                   </span>
                 </li>
               </ul>
+            </div>
+            <div className={classes.marketCapRight}>
+              <ul></ul>
             </div>
           </div>
         </div>
