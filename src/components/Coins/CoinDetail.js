@@ -182,6 +182,32 @@ const CoinDetail = (props) => {
     );
   };
 
+  const priceChangeData = [
+    ["24h", loadedDetails?.priceChange24Hour, loadedDetails?.priceChange24HourCurrency],
+    ["7d", loadedDetails?.priceChange7Days, loadedDetails?.priceChange7DaysCurrency],
+    ["14d", loadedDetails?.priceChange14Days, loadedDetails?.priceChange14DaysCurrency],
+    ["30d", loadedDetails?.priceChange30Days, loadedDetails?.priceChange30DaysCurrency],
+    ["60d", loadedDetails?.priceChange60Days, loadedDetails?.priceChange60DaysCurrency],
+    ["200d", loadedDetails?.priceChange200Days, loadedDetails?.priceChange200DaysCurrency],
+    ["1y", loadedDetails?.priceChange1Year, loadedDetails?.priceChange1YearCurrency],
+  ];
+
+  const marketCapData = [
+    ["Market Cap", loadedDetails?.marketCap, "usd", "currency", 2],
+    ["24H Trading Vol", loadedDetails?.totalVolume, "usd", "currency", 2],
+    ["Fully Diluted Valuation", loadedDetails?.fullyValuation, "usd", "currency", 2],
+    ["Circulating Supply", loadedDetails?.circulatingSupply, undefined, undefined, 0],
+    ["Total Supply", loadedDetails?.totalSupply, undefined, undefined, 0],
+    ["Max Supply", loadedDetails?.maxSupply, undefined, undefined, 0],
+  ];
+
+  const infoData = [
+    ["Website", loadedDetails?.website, "Official Website"],
+    ["Explore", loadedDetails?.blockchair, "Blockchair"],
+    ["Forum", loadedDetails?.officialForum, "Official Forum"],
+    ["Source Code", loadedDetails?.website, "Github"],
+  ];
+  
   return (
     <main className={classes.main}>
       <div>
@@ -212,60 +238,20 @@ const CoinDetail = (props) => {
           <div className={classes.marketCap}>
             <div className={classes.marketCapLeft}>
               <ul>
-                <li>
-                  <span>Market Cap</span> <span>{fixedMarketCap}</span>
-                </li>
-                <li>
-                  <span>24H Trading Vol</span> <span>{fixedVolume}</span>
-                </li>
-                <li>
-                  <span>Fully Diluted Valuation</span>{" "}
-                  <span>
-                    {currencyFormatter(
-                      loadedDetails?.fullyValuation || 0,
-                      "en-US",
-                      "usd",
-                      "currency",
-                      2
-                    )}
-                  </span>
-                </li>
-                <li>
-                  <span>Circulating Supply</span>{" "}
-                  <span>
-                    {currencyFormatter(
-                      loadedDetails?.circulatingSupply,
-                      "en-US",
-                      undefined,
-                      undefined,
-                      0
-                    )}
-                  </span>
-                </li>
-                <li>
-                  <span>Total Supply</span>{" "}
-                  <span>
-                    {currencyFormatter(
-                      loadedDetails?.totalSupply,
-                      "en-US",
-                      undefined,
-                      undefined,
-                      0
-                    )}
-                  </span>
-                </li>
-                <li>
-                  <span>Max Supply</span>{" "}
-                  <span>
-                    {currencyFormatter(
-                      loadedDetails?.maxSupply,
-                      "en-US",
-                      undefined,
-                      undefined,
-                      0
-                    )}
-                  </span>
-                </li>
+                {marketCapData?.map((item, i) => (
+                  <li key={i}>
+                    <span>{item[0] || "Not Found!"}</span>{" "}
+                    <span>
+                      {currencyFormatter(
+                        item[1] || 0,
+                        "en-US",
+                        item[2],
+                        item[3],
+                        item[4]
+                      )}
+                    </span>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className={classes.marketCapRight}>
@@ -277,26 +263,12 @@ const CoinDetail = (props) => {
           <h2>Info</h2>
           <div className={classes.infoContent}>
             <ul>
-              <li>
-                <span>Website</span>
-                <a href={loadedDetails?.website}>Official Website</a>
-              </li>
-              <li>
-                <span>Explore</span>
-                <a href={loadedDetails?.blockchair}>Blockchair</a>
-              </li>
-              <li>
-                <span>Forum</span>
-                <a href={loadedDetails?.officialForum}>Official Forum</a>
-              </li>
-              <li>
-                <span>Hash Algorithm</span>
-                <p>{loadedDetails?.hashAlgorithm || "Not Found"}</p>
-              </li>
-              <li>
-                <span>Source Code</span>
-                <a href={loadedDetails?.sourceCode}>Github</a>
-              </li>
+              {infoData.map((item, i) => (
+                <li key={i}>
+                  <span>{item[0] || "Not Found!"}</span>
+                  <a href={item[1] || "#"}>{item[2] || "Not Found!"}</a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -305,55 +277,13 @@ const CoinDetail = (props) => {
         <h2>Price Change</h2>
         <div className={classes.priceChangeList}>
           <ul>
-            <li>
-              <p>24h</p>
-              {priceChange24Hour(loadedDetails?.priceChange24Hour)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange24HourCurrency
-              )}
-            </li>
-            <li>
-              <p>7d</p>
-              {priceChange24Hour(loadedDetails?.priceChange7Days)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange7DaysCurrency
-              )}
-            </li>
-            <li>
-              <p>14d</p>
-              {priceChange24Hour(loadedDetails?.priceChange14Days)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange14DaysCurrency
-              )}
-            </li>
-            <li>
-              <p>30d</p>
-              {priceChange24Hour(loadedDetails?.priceChange30Days)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange30DaysCurrency
-              )}
-            </li>
-            <li>
-              <p>60d</p>
-              {priceChange24Hour(loadedDetails?.priceChange60Days)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange60DaysCurrency
-              )}
-            </li>
-            <li>
-              <p>200d</p>
-              {priceChange24Hour(loadedDetails?.priceChange200Days)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange200DaysCurrency
-              )}
-            </li>
-            <li>
-              <p>1y</p>
-              {priceChange24Hour(loadedDetails?.priceChange1Year)}
-              {priceChange24HourCurrency(
-                loadedDetails?.priceChange1YearCurrency
-              )}
-            </li>
+            {priceChangeData?.map((item, i) => (
+              <li key={i}>
+                <p>{item[0]}</p>
+                {priceChange24Hour(item[1] || 0)}
+                {priceChange24HourCurrency(item[1] || 0)}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -366,8 +296,8 @@ const CoinDetail = (props) => {
           <div className={classes.content}>
             <ul>
               <li>
-                <p>Bitcoin Price</p>
-                <span>{fixedPrice}</span>
+                <p>{loadedDetails?.name} Price</p>
+                <span>{fixedPrice || 0}</span>
               </li>
               <li>
                 <p>Market Cap</p>
